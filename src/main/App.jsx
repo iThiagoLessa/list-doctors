@@ -1,25 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
+import axios from "axios";
+import Filter from "../components/Filter";
+import TableDoctors from "../components/TableDoctors";
+const URL = "http://localhost:3030/doctors";
 
-const App = (props) => {
-  return (
-    <div className="container main-container">
-      {/* Header */}
-      <div className="row">
-        <h2>Doctors</h2>
-      </div>
+export default class App extends Component {
 
-      {/* FILTER AREA*/}
-      <div className="row">
-        <div className="column column-20">Filter By:</div>
-        <div className="column column-20">
-          <select id="availabilityFilterSelect">
-              <option value="all">All Doctors</option>
-              <option value="available">Available Doctors</option>
-          </select>
+  render() {
+    return (
+      <div className="container main-container">
+        {/* Header */}
+        <div className="row">
+          <h2>Doctors</h2>
         </div>
-      </div>
-    </div>
-  );
-};
 
-export default App;
+        {/* FILTER AREA*/}
+        <Filter />
+
+        {/* CONTENT */}
+        <TableDoctors />
+      </div>
+    );
+  }
+}
