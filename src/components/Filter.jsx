@@ -5,7 +5,7 @@ const Filter = (props) => {
     <div className="row">
       <div className="column column-20">Filter By:</div>
       <div className="column column-20">
-        <select id="availabilityFilterSelect">
+        <select id="availabilityFilterSelect" onChange={props.handleAvailableDoctors}>
           <option value="all">All Doctors</option>
           <option value="available">Available Doctors</option>
         </select>
