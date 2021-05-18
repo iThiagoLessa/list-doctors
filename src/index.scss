@@ -2,4 +2,35 @@
     max-width: 80rem;
     padding-bottom: 7.5rem;
     padding-top: 7.5rem;
+    #searchContainer form {
+        display: flex;
+        button {
+            margin-left: 10px;
+        }
+    }
+    table {
+        tbody{
+            button {
+                width: 80%;
+            }
+            .available {
+                background-color: green;
+                color: white;
+                border: 1px solid green;
+                &:hover {
+                    background-color: #08bc08;
+                    border: 1px solid #08bc08;
+                }
+            }
+            .unavailable {
+                background-color: red;
+                border: 1px solid red;
+                color: white;
+                &:hover {
+                    background-color: #be0000;
+                    border: 1px solid #be0000;
+                }
+            }
+        }
+    }
   }

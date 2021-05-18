@@ -22,7 +22,7 @@ const TableDoctors = (props) => {
                   <td>{doctor.zipcode}</td>
                   <td>{doctor.city}</td>
                   <td>
-                    <button className="button button-outline">
+                    <button onClick={props.onClick} className={`button button-outline ${doctor.available ? 'available' : 'unavailable'}`}>
                       Mark as {doctor.available ? 'available' : 'unavailable'}
                     </button>
                   </td>
@@ -51,7 +51,7 @@ const TableDoctors = (props) => {
               <td className="zipcode">92037</td>
               <td className="city">La Jolla</td>
               <td>
-                <button className="button button-outline">
+                <button onClick={props.onClick} className="button button-outline available">
                   Mark as Available
                 </button>
               </td>
@@ -61,7 +61,7 @@ const TableDoctors = (props) => {
               <td className="zipcode">92037</td>
               <td className="city">La Jolla</td>
               <td>
-                <button className="button button-outline">
+                <button className="button button-outline unavailable">
                   Mark as Unavailable
                 </button>
               </td>
@@ -71,7 +71,7 @@ const TableDoctors = (props) => {
               <td className="zipcode">92015</td>
               <td className="city">San Diego</td>
               <td>
-                <button className="button button-outline">
+                <button className="button button-outline unavailable">
                   Mark as Unavailable
                 </button>
               </td>
@@ -81,7 +81,7 @@ const TableDoctors = (props) => {
               <td className="zipcode">92015</td>
               <td className="city">San Diego</td>
               <td>
-                <button className="button button-outline">
+                <button className="button button-outline available">
                   Mark as Available
                 </button>
               </td>
@@ -91,7 +91,7 @@ const TableDoctors = (props) => {
               <td className="zipcode">92015</td>
               <td className="city">San Diego</td>
               <td>
-                <button className="button button-outline">
+                <button className="button button-outline unavailable">
                   Mark as Unavailable
                 </button>
               </td>
@@ -101,7 +101,7 @@ const TableDoctors = (props) => {
               <td className="zipcode">92015</td>
               <td className="city">San Diego</td>
               <td>
-                <button className="button button-outline">
+                <button className="button button-outline unavailable">
                   Mark as Unavailable
                 </button>
               </td>
@@ -111,7 +111,7 @@ const TableDoctors = (props) => {
               <td className="zipcode">92037</td>
               <td className="city">La Jolla</td>
               <td>
-                <button className="button button-outline">
+                <button className="button button-outline unavailable">
                   Mark as Unavailable
                 </button>
               </td>
@@ -121,7 +121,7 @@ const TableDoctors = (props) => {
               <td className="zipcode">92037</td>
               <td className="city">San Diego</td>
               <td>
-                <button className="button button-outline">
+                <button className="button button-outline unavailable">
                   Mark as Unavailable
                 </button>
               </td>

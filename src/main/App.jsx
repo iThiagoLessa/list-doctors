@@ -8,10 +8,12 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.handleAvailableDoctors = this.handleAvailableDoctors.bind(this);
+    this.handleMark = this.handleMark.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.state = {
       savedInfos: null,
       edit: false,
-      doctors: []
+      doctors: [],
     };
   }
 
@@ -29,7 +31,7 @@ export default class App extends Component {
       acc.push({ upin, name, zipcode, city });
       return acc;
     }, []);
-    this.setState({savedInfos:doctors});
+    this.setState({ savedInfos: doctors });
   }
 
   handleAvailableDoctors(e) {
@@ -40,25 +42,67 @@ export default class App extends Component {
           (doctor) => doctor.available === true
         );
         const arr = [];
-        const mapDoctor = doctorAvailable.map(doctor => {
-          const addInfos = this.state.savedInfos.find(element => element.upin == doctor.upin);
+        const mapDoctor = doctorAvailable.map((doctor) => {
+          const addInfos = this.state.savedInfos.find(
+            (element) => element.upin == doctor.upin
+          );
           doctor.city = addInfos.city;
           doctor.zipcode = addInfos.zipcode;
           arr.push(doctor);
         });
-        this.setState({doctors: doctorAvailable, edit: true});
+        this.setState({ doctors: doctorAvailable, edit: true });
       } else {
         const allDoctors = resp.data;
         const arr = [];
-        const mapDoctor = allDoctors.map(doctor => {
-          const addInfos = this.state.savedInfos.find(element => element.upin == doctor.upin);
+        const mapDoctor = allDoctors.map((doctor) => {
+          const addInfos = this.state.savedInfos.find(
+            (element) => element.upin == doctor.upin
+          );
           doctor.city = addInfos.city;
           doctor.zipcode = addInfos.zipcode;
           arr.push(doctor);
         });
-        this.setState({doctors: arr});
+        this.setState({ doctors: arr });
       }
     });
+  }
+
+  handleMark(e) {
+    console.log("clicado")
+    const td = e.target.parentElement;
+    const tr = td.parentElement;
+    const upin = parseInt(tr.dataset.upin);
+    const obj = [...this.state.doctors];
+
+    const newAvailable = obj.map((doctor) => {
+      if (doctor.upin === upin) {
+        doctor.available ? doctor.available = false : doctor.available = true
+      }
+      return doctor;
+    });
+    console.log(newAvailable);
+    this.setState({ doctors: newAvailable });
+  }
+
+  handleSearch(e) {
+    e.preventDefault();
+    const upin = document.getElementById("filterUpin").value.trim();
+    if (upin != "") {
+      axios.get(`${URL}?upin=${upin}`).then((resp) => {
+        const arr = [];
+        const mapDoctor = resp.data.map((doctor) => {
+          const addInfos = this.state.savedInfos.find(
+            (element) => element.upin == doctor.upin
+          );
+          doctor.city = addInfos.city;
+          doctor.zipcode = addInfos.zipcode;
+          arr.push(doctor);
+        });
+        //console.log(arr);
+
+        this.setState({ doctors: arr, edit: true });
+      });
+    }
   }
 
   render() {
@@ -70,10 +114,18 @@ export default class App extends Component {
         </div>
 
         {/* FILTER AREA*/}
-        <Filter handleAvailableDoctors={this.handleAvailableDoctors} />
+        <Filter
+          handleAvailableDoctors={this.handleAvailableDoctors}
+          handleSearch={this.handleSearch}
+        />
 
         {/* CONTENT */}
-        <TableDoctors doctors={this.state.doctors} savedInfos={this.state.savedInfos} validator={this.state.edit} />
+        <TableDoctors
+          doctors={this.state.doctors}
+          savedInfos={this.state.savedInfos}
+          onClick={this.handleMark}
+          validator={this.state.edit}
+        />
       </div>
     );
   }
