@@ -31,7 +31,9 @@ export default class App extends Component {
       acc.push({ upin, name, zipcode, city });
       return acc;
     }, []);
+    //console.log(doctors);
     this.setState({ savedInfos: doctors });
+    //this.setState({doctors, edit:true});
   }
 
   handleAvailableDoctors(e) {
@@ -67,8 +69,11 @@ export default class App extends Component {
     });
   }
 
+  handleMapDoctor() {
+    console.log(this.state.savedInfos);
+  }
+
   handleMark(e) {
-    console.log("clicado")
     const td = e.target.parentElement;
     const tr = td.parentElement;
     const upin = parseInt(tr.dataset.upin);
@@ -88,20 +93,37 @@ export default class App extends Component {
     e.preventDefault();
     const upin = document.getElementById("filterUpin").value.trim();
     if (upin != "") {
-      axios.get(`${URL}?upin=${upin}`).then((resp) => {
-        const arr = [];
-        const mapDoctor = resp.data.map((doctor) => {
-          const addInfos = this.state.savedInfos.find(
-            (element) => element.upin == doctor.upin
-          );
-          doctor.city = addInfos.city;
-          doctor.zipcode = addInfos.zipcode;
-          arr.push(doctor);
+      if(isNaN(upin)) {
+        axios.get(`${URL}?name_like=${upin}`).then((resp) => {
+          const arr = [];
+          const mapDoctor = resp.data.map((doctor) => {
+            const addInfos = this.state.savedInfos.find(
+              (element) => element.upin == doctor.upin
+            );
+            doctor.city = addInfos.city;
+            doctor.zipcode = addInfos.zipcode;
+            arr.push(doctor);
+          });
+          //console.log(arr);
+  
+          this.setState({ doctors: arr, edit: true });
         });
-        //console.log(arr);
-
-        this.setState({ doctors: arr, edit: true });
-      });
+      }else {
+        axios.get(`${URL}?upin=${upin}`).then((resp) => {
+          const arr = [];
+          const mapDoctor = resp.data.map((doctor) => {
+            const addInfos = this.state.savedInfos.find(
+              (element) => element.upin == doctor.upin
+            );
+            doctor.city = addInfos.city;
+            doctor.zipcode = addInfos.zipcode;
+            arr.push(doctor);
+          });
+          //console.log(arr);
+  
+          this.setState({ doctors: arr, edit: true });
+        });
+      }
     }
   }
 

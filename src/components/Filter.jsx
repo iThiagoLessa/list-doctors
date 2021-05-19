@@ -15,7 +15,7 @@ const Filter = (props) => {
       </div>
       <div id="searchContainer" className="column">
         <form>
-          <input type="number" id="filterUpin" placeholder="search for Upin" />
+          <input type="text" id="filterUpin" placeholder="search for Upin or Doctor Name" />
           <button onClick={props.handleSearch}>Pesquisar</button>
         </form>
       </div>
