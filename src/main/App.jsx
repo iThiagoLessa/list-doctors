@@ -31,9 +31,21 @@ export default class App extends Component {
       acc.push({ upin, name, zipcode, city });
       return acc;
     }, []);
-    //console.log(doctors);
-    this.setState({ savedInfos: doctors });
-    //this.setState({doctors, edit:true});
+
+
+    axios.get(`${URL}`).then((resp) => {
+      const allDoctors = resp.data;
+        const arr = [];
+        const mapDoctor = allDoctors.map((doctor) => {
+          const addInfos = doctors.find(
+            (element) => element.upin == doctor.upin
+          );
+          doctor.city = addInfos.city;
+          doctor.zipcode = addInfos.zipcode;
+          arr.push(doctor);
+        });
+        this.setState({ savedInfos: doctors, doctors: arr, edit: true });
+    });
   }
 
   handleAvailableDoctors(e) {
@@ -67,10 +79,6 @@ export default class App extends Component {
         this.setState({ doctors: arr });
       }
     });
-  }
-
-  handleMapDoctor() {
-    console.log(this.state.savedInfos);
   }
 
   handleMark(e) {
@@ -119,8 +127,6 @@ export default class App extends Component {
             doctor.zipcode = addInfos.zipcode;
             arr.push(doctor);
           });
-          //console.log(arr);
-  
           this.setState({ doctors: arr, edit: true });
         });
       }
