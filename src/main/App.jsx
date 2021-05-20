@@ -15,6 +15,11 @@ export default class App extends Component {
       edit: false,
       doctors: [],
     };
+    //this.handleTest();
+  }
+
+  handleTest() {
+    axios.put(`${URL}?upin=202029`, {available: true}).then(resp => console.log("feito"));
   }
 
   componentDidMount() {

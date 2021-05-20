@@ -1,36 +1,50 @@
 .container.main-container {
-    max-width: 80rem;
+    max-width     : 80rem;
     padding-bottom: 7.5rem;
-    padding-top: 7.5rem;
+    padding-top   : 7.5rem;
+
     #searchContainer form {
         display: flex;
+
         button {
-            margin-left: 10px;
+            margin-left     : 10px;
+            background-color: #01a301;
+            border          : 1px solid #01a301;
+
+            &:hover {
+                background-color: green;
+                border          : 1px solid green;
+            }
         }
     }
+
     table {
-        tbody{
+        tbody {
             button {
                 width: 80%;
             }
+
             .available {
                 background-color: green;
-                color: white;
-                border: 1px solid green;
+                color           : white;
+                border          : 1px solid green;
+
                 &:hover {
-                    background-color: #08bc08;
-                    border: 1px solid #08bc08;
+                    background-color: #01a301;
+                    border          : 1px solid #01a301;
                 }
             }
+
             .unavailable {
-                background-color: red;
-                border: 1px solid red;
-                color: white;
+                background-color: #dadada;
+                border          : 1px solid #dadada;
+                color           : black;
+
                 &:hover {
-                    background-color: #be0000;
-                    border: 1px solid #be0000;
+                    background-color: #cacaca;
+                    border          : 1px solid #cacaca;
                 }
             }
         }
     }
-  }
+}
