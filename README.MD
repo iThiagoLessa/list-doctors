@@ -6,10 +6,10 @@ first you need to open the project in your editor code, and have to run the foll
 3 - npm run start:client -> to run the project in mode development in port 9000 (http://localhost:9000/).
 
 # About the ReactJs
-In my tests to change this project to add ReactJs, i changed the output in webapack and installed some dependencias in my projeto to run the react.
+In my tests to change this project to add ReactJs, I changed the output in webapack and installed some dependencias in my project to run the react.
 
 # About the decision to apply SASS
-I decided to use SASS in my project because actually i'm studying about this preprocessor which is one of the most respected in the world.
+I decided to use SASS in my project because actually I'm studying about this preprocessor which is one of the most respected in the world.
 
 # About the enhancements/bug fixes 
 1 - Now, the available doctors filter is working.\
